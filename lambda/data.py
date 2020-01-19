@@ -16,7 +16,7 @@ LISTENING_PASSAGE_QUESTION_START = 'Here is your question.'
 QUESTION_LIST = ['Quand mariah se douche-t-elle habituellement?', 'Ce qui est cassé dans la salle de bain?', 'De quelle couleur est sa chemise?']
 
 sayinfrench_QUESTION_LIST = ['bathroom', 'lights', 'clothes']
-sayinfrench_ANSWER_LIST = ['la salle de baine', 'les lumières', 'les vêtements']
+sayinfrench_ANSWER_LIST = ['la salle de bains', 'les lumières', 'les vêtements']
 
 ANSWER_LIST = ['dans la matinée', 'la toilette', 'rouge']
 
