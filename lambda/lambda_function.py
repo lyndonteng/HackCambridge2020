@@ -322,29 +322,31 @@ class AnswerinFrenchIntentHandler(AbstractRequestHandler):
 
         if user_answer == actual_answer:
             attr["wrong_answer_number"] = 0
-            if (attr["sayinfrench_question_number"]) == len(data.sayinfrench_QUESTION_LIST) - 1:
-                attr['state'] = 'ANSWERINFRENCH_INTRO'
-                response = response = '<speak>Très bien! <voice name="Amy"><lang xml:lang="en-GB">Shall we move on to the next section of this lesson? </lang></voice>' + '</speak>'
+
+            if (attr["sayinfrench_number"]) == len(data.sayinfrench_QUESTION_LIST) - 1:
+                attr['state'] = 'END'
+                response = response = '<speak>Très bien! <voice name="Amy"><lang xml:lang="en-GB">Great Job and see you again! </lang></voice>' + '</speak>'
             else:
-                attr["sayinfrench_question_number"] += 1
+                attr["sayinfrench_number"] += 1
                 response = '<speak>Très bien! <voice name="Amy"><lang xml:lang="en-GB">Let us move on to the next question. </lang></voice>' + \
-                           data.sayinfrench_QUESTION_LIST[attr["sayinfrench_question_number"]] + '</speak>'
+                           data.sayinfrench_QUESTION_LIST[attr["sayinfrench_number"]] + '</speak>'
         else:
             if attr.get("wrong_answer_number") == 0:
                 attr["wrong_answer_number"] += 1
             else:
                 attr["wrong_answer_number"] = 0
-                if (attr["sayinfrench_question_number"]) == len(data.sayinfrench_QUESTION_LIST):
+
+                if (attr["sayinfrench_number"]) == len(data.sayinfrench_QUESTION_LIST) - 1:
                     response = '<speak>Pas vrai. <voice name="Amy"><lang xml:lang="en-GB"> The correct answer is: </lang></voice>' + \
                                data.sayinfrench_ANSWER_LIST[attr[
-                                   "sayinfrench_question_number"]] + ' <voice name="Amy"><lang xml:lang="en-GB">Shall we move on to the next section of this lesson? </lang></voice>' + '</speak>'
-                    attr['state'] = 'ANSWERINFRENCH_INTRO'
+                                   "sayinfrench_number"]] + ' <voice name="Amy"><lang xml:lang="en-GB">Great job and see you again! </lang></voice>' + '</speak>'
+                    attr['state'] = 'END'
                 else:
                     response = '<speak>Pas vrai. <voice name="Amy"><lang xml:lang="en-GB"> The correct answer is: </lang></voice>' + \
                                data.sayinfrench_ANSWER_LIST[attr[
-                                   "sayinfrench_question_number"]] + ' <voice name="Amy"><lang xml:lang="en-GB">The next question is: </lang></voice>' + \
-                               data.sayinfrench_QUESTION_LIST[attr["sayinfrench_question_number"] + 1] + '</speak>'
-                    attr["sayinfrench_question_number"] += 1
+                                   "sayinfrench_number"]] + ' <voice name="Amy"><lang xml:lang="en-GB">The next question is: </lang></voice>' + \
+                               data.sayinfrench_QUESTION_LIST[attr["sayinfrench_number"] + 1] + '</speak>'
+                    attr["sayinfrench_number"] += 1
 
         response_builder = handler_input.response_builder
         response_builder.speak(response)
